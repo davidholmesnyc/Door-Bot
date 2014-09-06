@@ -5,12 +5,15 @@
 I made RPOC because I leave the house and always wonder if I left the front door open or not. To combat that fear; I turned to what I knew best, technology. Using a raspberry pi and python code; I wrote a simple bot script that will send an email or a text to remind me that the door was indeed closed.
 
 
+
+
 ##Project Requirements
 * <a href="http://www.amazon.com/RASPBERRY-MODEL-756-8308-Raspberry-Pi/dp/B009SQQF9C">Raspberry Pi </a>(Amazon aPrime)
 
 *
 <a href="http://www.adafruit.com/product/375">Door        Contact Switches
 </a>
+
 
 Total Cost : Less than  $50
 
@@ -36,7 +39,7 @@ sudo nano config.json
 
 # 3) Start Server
 
-python doorSensor.py
+python doorSever.py
 ```
 
 

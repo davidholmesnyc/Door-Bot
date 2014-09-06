@@ -21,7 +21,7 @@ sent_close_email_already = 0
 sent_open_email_already = 0
 door_pin = True 
 
-print len(sys.argv)
+# RASPBERRY PI STUFF 
 try:
 	if len(sys.argv) < 2:
 			import RPi.GPIO as io  
@@ -85,7 +85,7 @@ def __init__():
 	return 
 # END OF init
 
-# TEST SUITE -- JUST RUN TEST AND IT WILL RANDOMLY ACT LIKE THE DOOR IS OPENING OR CLOSING EVERY 5 SECONDS 
+# TEST SUITE -- JUST RUN the TEST Parameter AND IT WILL RANDOMLY ACT LIKE THE DOOR IS OPENING OR CLOSING EVERY 5 SECONDS 
 #print sys.argv[1]
 if sys.argv[1] == 'test':
 	def testServer():
