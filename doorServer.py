@@ -65,7 +65,7 @@ def action(action):
 def send_email(action):
 	fromaddr = config["GMAIL-USERNAME"]
 	toaddrs  = config["TO"]
-	msg = "\n The Door was "+action+" @ " + datetime.datetime.now().strftime("%A, %B %d %Y %I:%M%p") # The /n separates the message from the headers
+	msg = "\n The Door was "+action+" on " + datetime.datetime.now().strftime("%A, %B %d %Y %I:%M%p") # The /n separates the message from the headers
 	server = smtplib.SMTP('smtp.gmail.com:587')
 	server.starttls()
 	server.login(config["GMAIL-USERNAME"],config["GMAIL-PASSWORD"])
