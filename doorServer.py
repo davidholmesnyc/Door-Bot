@@ -26,7 +26,8 @@ try:
 	if len(sys.argv) < 2:
 			import RPi.GPIO as io  
 			io.setmode(io.BCM)
-			io.setup(door_pin, io.IN, pull_up_down=io.PUD_UP)  # activate input with PullUp
+
+			io.setup( config['RASPBERRY_PI_PIN'] , io.IN, pull_up_down=io.PUD_UP)  # activate input with PullUp
 			door_pin = io.input( config['RASPBERRY_PI_PIN'] )
 except ImportError:
 		raise ImportError("not running from a raspberry pi if you want to test this program please edit the config and then run 'python doorServer.py test' to run in test mode ")
