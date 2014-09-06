@@ -3,6 +3,6 @@
     "GMAIL-USERNAME":"myGMailAccount@gmail.com",
     "GMAIL-PASSWORD":"myGMailPassword",
     "TO":"SEND_TO_SOMEONE@thierEmailAddress.com",
-    "RASPBERRY_PI_PIN":"23"
+    "RASPBERRY_PI_PIN":23
 
 }
