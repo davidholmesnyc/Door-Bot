@@ -35,11 +35,14 @@ connect the contact switch to pin 23 use the guides below to help you.
 
 git clone https://github.com/davidholmesnyc/doorSensor.git
 
-# 2) Edit Config
+# 2) Go to folder
+cd doorSensor
+
+# 3) Edit Config
 
 sudo nano config.json
 
-# 3) Start Server
+# 4) Start Server
 
 python doorSever.py
 ```
