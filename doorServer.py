@@ -6,9 +6,6 @@ import json
 import sys
 from pprint import pprint
 
-
-
-
 #START OF GET CONFIG 
 json_data=open('config.json')
 config = json.load(json_data)
@@ -26,12 +23,17 @@ sent_open_email_already = 0
 #END OF CACHE VARIBLES 
 door_pin = True ## UNCOMMENT TO DEBUG WITH RASPBERRY PI STUFF COMMENTED OUT 
 #RASPBERRY PI STUFF 
+try:
+	if sys.argv[1] != 'test':
+	    import RPi.GPIO as io  
+	    door_pin = io.input( config['RASPBERRY_PI_PIN'] )
+	    io.setmode(io.BCM)
+	    io.setup(door_pin, io.IN, pull_up_down=io.PUD_UP)  # activate input with PullUp
 
-#import RPi.GPIO as io
-#door_pin = io.input( config['RASPBERRY_PI_PIN'] )
-#io.setmode(io.BCM)
-#io.setup(pir_pin, io.IN)         # activate input
-#io.setup(door_pin, io.IN, pull_up_down=io.PUD_UP)  # activate input with PullUp
+except ImportError:
+	print("not running from a raspberry pi if you want to test this program please edit the config and then run 'python doorServer.py test' to run in test mode ")
+
+
 
 # END OF RASPBERRY PI STUFF 
 
