@@ -19,10 +19,9 @@ json_data.close()
 
 sent_close_email_already = 0
 sent_open_email_already = 0
+door_pin = True 
 
-#END OF CACHE VARIBLES 
-door_pin = True ## UNCOMMENT TO DEBUG WITH RASPBERRY PI STUFF COMMENTED OUT 
-#RASPBERRY PI STUFF 
+
 try:
 	if sys.argv[1] != 'test':
 	    import RPi.GPIO as io  
