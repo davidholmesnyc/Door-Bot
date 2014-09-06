@@ -21,16 +21,15 @@ sent_close_email_already = 0
 sent_open_email_already = 0
 door_pin = True 
 
-
+print len(sys.argv)
 try:
-	if sys.argv[1] != 'test':
-	    import RPi.GPIO as io  
-	    door_pin = io.input( config['RASPBERRY_PI_PIN'] )
-	    io.setmode(io.BCM)
-	    io.setup(door_pin, io.IN, pull_up_down=io.PUD_UP)  # activate input with PullUp
-
+	if len(sys.argv) < 2:
+			import RPi.GPIO as io  
+			door_pin = io.input( config['RASPBERRY_PI_PIN'] )
+			io.setmode(io.BCM)
+			io.setup(door_pin, io.IN, pull_up_down=io.PUD_UP)  # activate input with PullUp
 except ImportError:
-	print("not running from a raspberry pi if you want to test this program please edit the config and then run 'python doorServer.py test' to run in test mode ")
+		raise ImportError("not running from a raspberry pi if you want to test this program please edit the config and then run 'python doorServer.py test' to run in test mode ")
 
 
 
@@ -87,7 +86,7 @@ def __init__():
 # END OF init
 
 # TEST SUITE -- JUST RUN TEST AND IT WILL RANDOMLY ACT LIKE THE DOOR IS OPENING OR CLOSING EVERY 5 SECONDS 
-print sys.argv[1]
+#print sys.argv[1]
 if sys.argv[1] == 'test':
 	def testServer():
 		print('Starting Test Mode --- EVERY 5 SECONDS THE DOOR WILL OPEN OR CLOSE')
