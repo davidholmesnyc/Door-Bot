@@ -1,6 +1,7 @@
 #Simple Raspberry Pi Open/Close Door Sensor With Email Software Written in Python or RPOC for short.
 
-<a href="http://imgur.com/oEBoSvk"><img src="http://i.imgur.com/oEBoSvk.png" title="Hosted by imgur.com" /></a>
+##Preview
+<a href="http://imgur.com/oEBoSvk"><img src="http://i.imgur.com/oEBoSvk.png" title="Hosted by imgur.com" height="360px" /></a>
 
 ##Why I made it ?
 I made RPOC because I leave the house and always wonder if I left the front door open or not. To combat that fear; I turned to what I knew best, technology. Using a raspberry pi and python code; I wrote a simple bot script that will send an email or a text to remind me that the door was indeed closed.
@@ -20,7 +21,7 @@ Total Cost : Less than  $50
 
 
 ##Raspberry Pi Instructions
-connect the contact switch to port 23 use the guides below to help you.
+connect the contact switch to pin 23 use the guides below to help you.
 
 <img src="http://elinux.org/images/2/2a/GPIOs.png">
 
