@@ -6,6 +6,13 @@ import json
 import sys
 from pprint import pprint
 
+# THESE VARIBLES HELPS MAKE SURE WE DONT KEEP SENDING EMAILS  
+
+sent_close_email_already = 0
+sent_open_email_already = 0
+door_pin = True 
+
+
 #START OF GET CONFIG 
 json_data=open('config.json')
 config = json.load(json_data)
@@ -15,18 +22,13 @@ json_data.close()
 
 # END OF GET CONFIG 
 
-# THESE VARIBLES HELPS MAKE SURE WE DONT KEEP SENDING EMAILS  
-
-sent_close_email_already = 0
-sent_open_email_already = 0
-door_pin = True 
-
 # RASPBERRY PI STUFF 
+
 try:
+	
 	if len(sys.argv) < 2:
 			import RPi.GPIO as io  
 			io.setmode(io.BCM)
-
 			io.setup( config['RASPBERRY_PI_PIN'] , io.IN, pull_up_down=io.PUD_UP)  # activate input with PullUp
 			door_pin = io.input( config['RASPBERRY_PI_PIN'] )
 except ImportError:
@@ -38,7 +40,6 @@ except ImportError:
 
 
 # FUNCTIONS -- PATTERN STYLE DECROTIVE 
-
 def action(action):
 
 	global sent_close_email_already
@@ -77,6 +78,11 @@ def send_email(action):
 # init AKA DO THIS RIGHT NOW 
 def __init__():
 	while True:
+		try:
+			door_pin = io.input( config['RASPBERRY_PI_PIN'] )
+		except:
+			door_pin = door_pin
+			
 		if door_pin:
 			action('opened')
 		else:
@@ -88,28 +94,29 @@ def __init__():
 
 # TEST SUITE -- JUST RUN the TEST Parameter AND IT WILL RANDOMLY ACT LIKE THE DOOR IS OPENING OR CLOSING EVERY 5 SECONDS 
 #print sys.argv[1]
-if sys.argv[1] == 'test':
-	def testServer():
-		print('Starting Test Mode --- EVERY 5 SECONDS THE DOOR WILL OPEN OR CLOSE')
-		def set_interval(func, sec):
-			def func_wrapper():
-				set_interval(func, sec)
-			func()
-			t = threading.Timer(sec, func_wrapper)
-			t.start()
-			return t
+if len(sys.argv) > 2:
+	if sys.argv[1] == 'test':
+		def testServer():
+			print('Starting Test Mode --- EVERY 5 SECONDS THE DOOR WILL OPEN OR CLOSE')
+			def set_interval(func, sec):
+				def func_wrapper():
+					set_interval(func, sec)
+				func()
+				t = threading.Timer(sec, func_wrapper)
+				t.start()
+				return t
 
-		def randomDoorInput():
-			time.sleep(5)
-			global door_pin
-			if door_pin == True :
-				door_pin = False
-			else:
-				door_pin = True
-			return door_pin
+			def randomDoorInput():
+				time.sleep(5)
+				global door_pin
+				if door_pin == True :
+					door_pin = False
+				else:
+					door_pin = True
+				return door_pin
 
-		return set_interval(randomDoorInput,5)
-	testServer()
+			return set_interval(randomDoorInput,5)
+		testServer()
 #END OF TEST SUITE 
 
 
