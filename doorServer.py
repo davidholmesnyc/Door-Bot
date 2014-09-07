@@ -1,3 +1,4 @@
+#!/usr/bin/python 
 import time
 import smtplib
 import threading
@@ -5,6 +6,8 @@ import datetime
 import json
 import sys
 from pprint import pprint
+import sys, os
+
 
 # THESE VARIBLES HELPS MAKE SURE WE DONT KEEP SENDING EMAILS  
 
@@ -14,7 +17,8 @@ door_pin = True
 
 
 #START OF GET CONFIG 
-json_data=open('config.json')
+pathname = os.path.dirname(sys.argv[0])
+json_data=open(os.path.abspath(pathname)+'/config.json')
 config = json.load(json_data)
 print("Config\n")
 pprint(config)
@@ -64,16 +68,19 @@ def action(action):
 
 ## SEND EMAIL FUNCTON  -- ACCEPTED ACTION STATES('open','closed')
 def send_email(action):
-	fromaddr = config["GMAIL-USERNAME"]
-	toaddrs  = config["TO"]
-	msg = "\n The Door was "+action+" on " + datetime.datetime.now().strftime("%A, %B %d %Y %I:%M%p") # The /n separates the message from the headers
-	server = smtplib.SMTP('smtp.gmail.com:587')
-	server.starttls()
-	server.login(config["GMAIL-USERNAME"],config["GMAIL-PASSWORD"])
-	server.sendmail(fromaddr, toaddrs, msg)
-	server.quit()
-	print(msg)
-	
+	try:
+		fromaddr = config["GMAIL-USERNAME"]
+		toaddrs  = config["TO"]
+		msg = "\n The Door was "+action+" on " + datetime.datetime.now().strftime("%A, %B %d %Y %I:%M%p") # The /n separates the message from the headers
+		server = smtplib.SMTP('smtp.gmail.com:587')
+		server.starttls()
+		server.login(config["GMAIL-USERNAME"],config["GMAIL-PASSWORD"])
+		server.sendmail(fromaddr, toaddrs, msg)
+		server.quit()
+		print(msg)
+	except:
+		print("ERROR CONNECTING TO MAIL SERVER")
+		
 
 # init AKA DO THIS RIGHT NOW 
 def __init__():
@@ -82,7 +89,7 @@ def __init__():
 			door_pin = io.input( config['RASPBERRY_PI_PIN'] )
 		except:
 			door_pin = door_pin
-			
+
 		if door_pin:
 			action('opened')
 		else:

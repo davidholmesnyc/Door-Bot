@@ -45,6 +45,22 @@ sudo nano config.json
 # 4) Start Server
 
 python doorSever.py
+
+
+# Bonus
+# 5) Set up cron to run on start up
+
+sudo crontab -e
+
+# 6) Append this to the cron file
+
+SHELL=/bin/bash
+PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+
+@reboot /usr/bin/python /home/pi/Desktop/doorSensor/doorServer.py &
+
+
+#note I have my doorSenser Server on my desktop .. you may have to change the folder location to where you cloned doorSenser
 ```
 
 
@@ -55,7 +71,7 @@ python doorSever.py
 	"GMAIL-USERNAME":"myGMailAccount@gmail.com",
 	"GMAIL-PASSWORD":"myGMailPassword",
 	"TO":"SEND_TO_SOMEONE@thierEmailAddress.com",
-	"RASPBERRY_PI_PIN":"23"
+	"RASPBERRY_PI_PIN":23
 
 }
 ```
